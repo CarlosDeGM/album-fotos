@@ -8,14 +8,14 @@ function updatePhoto() {
   photo.src = `albums/${album}/${index}.jpg`;
 }
 
-document.getElementById('prev').onclick = () => {
+document.getElementById('prevBtn').onclick = () => {
   if (index > 1) {
     index--;
     updatePhoto();
   }
 };
 
-document.getElementById('next').onclick = () => {
+document.getElementById('nextBtn').onclick = () => {
   if (index < maxPhotos) {
     index++;
     updatePhoto();

@@ -8,10 +8,42 @@
 </head>
 <body>
   <div class="viewer">
-    <button id="prev">&#8592;</button>
+    <button id="prevBtn">&#8592;</button>
     <img id="photo" src="" alt="foto del álbum">
-    <button id="next">&#8594;</button>
+    <button id="nextBtn">&#8594;</button>
   </div>
   <script src="js/album.js"></script>
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+  
+    const viewer = document.querySelector('.viewer');
+  
+    function handleGesture() {
+      const swipeThreshold = 50; // Mínimo de píxeles para considerar swipe
+  
+      if (touchEndX < touchStartX - swipeThreshold) {
+        // Swipe a la izquierda → siguiente imagen
+        document.querySelector('#nextBtn')?.click();
+      }
+  
+      if (touchEndX > touchStartX + swipeThreshold) {
+        // Swipe a la derecha → imagen anterior
+        document.querySelector('#prevBtn')?.click();
+      }
+    }
+  
+    if (viewer) {
+      viewer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+  
+      viewer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture();
+      });
+    }
+  </script>
+  
 </body>
 </html>
